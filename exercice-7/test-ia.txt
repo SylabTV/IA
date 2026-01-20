@@ -1,0 +1,98 @@
+✅ 1) Explication globale (en une phrase)
+
+Ce programme vérifie si on a donné au moins 5 arguments en ligne de commande, et affiche un message si ce n’est pas le cas.
+
+✅ 2) Explication étape par étape
+🔹 1. Inclusion de la bibliothèque standard
+#include <stdio.h>
+
+
+👉 Cette ligne permet d’utiliser des fonctions d’affichage comme printf.
+
+🔹 2. Début de la fonction principale
+int main(int argc, char **argv, char **envp)
+{
+
+
+👉 main est le point d’entrée du programme.
+
+argc = nombre d’arguments passés au programme
+
+argv = tableau contenant ces arguments
+
+envp = tableau contenant les variables d’environnement (optionnel)
+
+🔹 3. Vérification du nombre d’arguments
+	if(argc < 5);
+	{
+		printf("Not enough arguments.\n");
+	}
+
+
+👉 Ici on veut vérifier si argc est inférieur à 5.
+
+⚠️ Mais il y a une erreur : le point-virgule ; après le if.
+
+Ce que ça fait réellement :
+if(argc < 5); // <-- le point-virgule termine le if
+{
+    printf("Not enough arguments.\n");
+}
+
+
+➡️ Le bloc { ... } s’exécute toujours, même si argc >= 5.
+
+📌 Donc le message s’affiche tout le temps, même si tu as assez d’arguments.
+
+🔹 4. Fin du programme
+	return 0;
+}
+
+
+👉 return 0; signifie que le programme s’est terminé correctement.
+
+⚠️ Erreurs à éviter
+
+Ne pas mettre de ; après un if
+
+if (condition); // ❌ erreur classique
+
+
+➜ Ça casse la logique du if.
+
+Confondre argc et argv
+
+argc = nombre d’arguments
+
+argv = contenu des arguments
+
+Ne pas vérifier argc correctement
+
+Souvent on pense qu’il faut 5 arguments, mais en réalité le programme compte aussi le nom du programme.
+
+📌 Bonnes pratiques
+
+✅ Pour corriger le code, il faut enlever le ; :
+
+if(argc < 5)
+{
+    printf("Not enough arguments.\n");
+}
+
+
+✅ Et mieux : afficher le nombre d’arguments attendus :
+
+if(argc < 5)
+{
+    printf("Not enough arguments. You need 4 arguments.\n");
+}
+
+📋 Tableau récapitulatif “Syntaxe & Concepts”
+Syntaxe	Signification	Exemple simple	Version débutant
+#include <stdio.h>	Importer les fonctions d’entrée/sortie	printf()	Permet d’afficher du texte
+int main()	Début du programme	int main(){}	Point de départ du programme
+argc	Nombre d’arguments	argc = 3	Combien de mots tu as tapés après le programme
+argv	Tableau des arguments	argv[1]	Le premier mot après le programme
+if (condition)	Condition	if (x < 5)	Si la condition est vraie, on exécute le bloc
+printf()	Affiche un texte	printf("Hello")	Afficher un message à l’écran
+return 0;	Fin du programme	return 0;	Le programme se termine normalement

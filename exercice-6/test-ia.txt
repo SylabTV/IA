@@ -1,98 +1,195 @@
 ✅ 1) Explication globale (en une phrase)
 
-Ce programme vérifie si on a donné au moins 5 arguments en ligne de commande, et affiche un message si ce n’est pas le cas.
+Ce code récupère un texte et des mots-clés depuis un formulaire, envoie ces informations à une IA pour calculer un score SEO, puis affiche la réponse dans une section de la page.
 
 ✅ 2) Explication étape par étape
-🔹 1. Inclusion de la bibliothèque standard
-#include <stdio.h>
+🔹 1. Déclaration de la classe
+export class ContentForm {
 
 
-👉 Cette ligne permet d’utiliser des fonctions d’affichage comme printf.
+👉 Ici tu crées une classe nommée ContentForm.
+Une classe est un modèle qui permet de créer un objet avec des méthodes et des données.
 
-🔹 2. Début de la fonction principale
-int main(int argc, char **argv, char **envp)
-{
-
-
-👉 main est le point d’entrée du programme.
-
-argc = nombre d’arguments passés au programme
-
-argv = tableau contenant ces arguments
-
-envp = tableau contenant les variables d’environnement (optionnel)
-
-🔹 3. Vérification du nombre d’arguments
-	if(argc < 5);
-	{
-		printf("Not enough arguments.\n");
-	}
+🔹 2. Définition des propriétés privées
+    #searchInput;
+    #contentInput;
+    #form;
 
 
-👉 Ici on veut vérifier si argc est inférieur à 5.
+👉 Le # signifie que ces propriétés sont privées, donc inaccessibles depuis l’extérieur de la classe.
 
-⚠️ Mais il y a une erreur : le point-virgule ; après le if.
+#searchInput : le champ de recherche SEO
 
-Ce que ça fait réellement :
-if(argc < 5); // <-- le point-virgule termine le if
-{
-    printf("Not enough arguments.\n");
-}
+#contentInput : le champ du contenu
+
+#form : le formulaire
+
+🔹 3. Le constructeur
+    constructor() {
+        this.#form = document.querySelector("#content-form");
+        this.#searchInput = document.querySelector("#seo-search");
+        this.#contentInput = document.querySelector("#content");
+
+        this.#form.addEventListener("submit", (event) => this.#submit(event));
+    }
+
+Ce que ça fait :
+
+Récupère les éléments HTML
+
+document.querySelector("#content-form") cherche l’élément avec l’id content-form
+
+idem pour #seo-search et #content
+
+Ajoute un événement au formulaire
+
+this.#form.addEventListener("submit", (event) => this.#submit(event));
 
 
-➡️ Le bloc { ... } s’exécute toujours, même si argc >= 5.
+👉 Quand tu envoies le formulaire, la méthode #submit() est appelée.
 
-📌 Donc le message s’affiche tout le temps, même si tu as assez d’arguments.
+🔹 4. Méthode privée #request
+    async #request(terms){
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: terms,
+        });
 
-🔹 4. Fin du programme
-	return 0;
-}
+        let modal = document.querySelector("div.modal");
+        modal.style.display = "none";
+
+        let section = document.querySelector("#gemini-answer");
+        section.scrollIntoView();
+
+        section.innerHTML = marked.parse(response.text);
+    }
+
+Étape par étape :
+
+Appel à une IA
+
+const response = await ai.models.generateContent({...});
 
 
-👉 return 0; signifie que le programme s’est terminé correctement.
+await : on attend la réponse de l’IA
+
+ai.models.generateContent : demande à l’IA de générer une réponse
+
+Cacher la fenêtre de chargement
+
+modal.style.display = "none";
+
+
+modal est une fenêtre qui apparaît pendant le calcul.
+
+Afficher la réponse
+
+let section = document.querySelector("#gemini-answer");
+section.scrollIntoView();
+section.innerHTML = marked.parse(response.text);
+
+
+scrollIntoView() : descend automatiquement jusqu’à la section
+
+marked.parse() : transforme le texte Markdown en HTML
+
+🔹 5. Méthode privée #submit
+    #submit(event)
+    {
+        event.preventDefault();
+        let modal = document.querySelector("div.modal");
+        modal.style.display = "grid";
+        let search = this.#searchInput.value;
+        let content = this.#contentInput.value;
+
+        let terms = `Bonjour, pourrais-tu me calculer un score SEO pour un contenu que je vais
+        t'envoyer en format Markdown. Les termes de recherches pour lesquels calculer sont les suivants : ${search}.
+        Le contenu est le suivant : ${content}. J'aurais besoin d'une réponse synthétique au format Markdown avec un score sur 20. Merci !`;
+
+        this.#request(terms);
+    }
+
+Ce que ça fait :
+
+Empêche l’envoi normal du formulaire
+
+event.preventDefault();
+
+
+➜ Sinon la page se recharge.
+
+Affiche un modal de chargement
+
+modal.style.display = "grid";
+
+
+Récupère les valeurs des champs
+
+let search = this.#searchInput.value;
+let content = this.#contentInput.value;
+
+
+Crée le message envoyé à l’IA
+
+let terms = `... ${search} ... ${content} ...`;
+
+
+Appelle la méthode #request
+
+this.#request(terms);
 
 ⚠️ Erreurs à éviter
 
-Ne pas mettre de ; après un if
+Oublier event.preventDefault()
 
-if (condition); // ❌ erreur classique
+Le formulaire recharge la page et le résultat disparaît.
+
+Sélectionner un élément qui n’existe pas
+
+document.querySelector("#content-form");
 
 
-➜ Ça casse la logique du if.
+Si l’élément n’existe pas, ça renvoie null et ton code plante.
 
-Confondre argc et argv
+Oublier await
 
-argc = nombre d’arguments
+Sans await, response ne contiendra pas le résultat de l’IA.
 
-argv = contenu des arguments
+Ne pas vérifier si le contenu est vide
 
-Ne pas vérifier argc correctement
-
-Souvent on pense qu’il faut 5 arguments, mais en réalité le programme compte aussi le nom du programme.
+Si search ou content est vide, l’IA risque de répondre n’importe quoi.
 
 📌 Bonnes pratiques
 
-✅ Pour corriger le code, il faut enlever le ; :
+✅ Vérifier que les éléments existent :
 
-if(argc < 5)
-{
-    printf("Not enough arguments.\n");
+if (!this.#form || !this.#searchInput || !this.#contentInput) {
+    console.error("Form elements missing");
+    return;
 }
 
 
-✅ Et mieux : afficher le nombre d’arguments attendus :
+✅ Ajouter une validation des champs :
 
-if(argc < 5)
-{
-    printf("Not enough arguments. You need 4 arguments.\n");
+if (!search || !content) {
+    alert("Merci de remplir tous les champs.");
+    return;
 }
 
 📋 Tableau récapitulatif “Syntaxe & Concepts”
 Syntaxe	Signification	Exemple simple	Version débutant
-#include <stdio.h>	Importer les fonctions d’entrée/sortie	printf()	Permet d’afficher du texte
-int main()	Début du programme	int main(){}	Point de départ du programme
-argc	Nombre d’arguments	argc = 3	Combien de mots tu as tapés après le programme
-argv	Tableau des arguments	argv[1]	Le premier mot après le programme
-if (condition)	Condition	if (x < 5)	Si la condition est vraie, on exécute le bloc
-printf()	Affiche un texte	printf("Hello")	Afficher un message à l’écran
-return 0;	Fin du programme	return 0;	Le programme se termine normalement
+class ContentForm {}	Définir une classe	class Car {}	Un modèle pour créer un objet
+#searchInput	Propriété privée	#name	Variable cachée dans la classe
+constructor()	Initialisation de l’objet	new ContentForm()	Code exécuté au début
+document.querySelector()	Récupérer un élément HTML	querySelector("#id")	Cherche un élément dans la page
+addEventListener("submit", ...)	Écouter un événement	click, submit	Réagir quand l’utilisateur fait une action
+event.preventDefault()	Bloquer le comportement par défaut	submit sans recharger	Empêche le rechargement automatique
+async/await	Attendre une réponse	await fetch()	Attendre une action qui prend du temps
+innerHTML	Écrire du HTML dans un élément	section.innerHTML = "Hello"	Affiche du contenu dans la page
+
+Si tu veux, je peux aussi :
+✅ t’expliquer comment créer le HTML correspondant
+✅ te montrer comment afficher une erreur si l’IA ne répond pas
+✅ te faire une version avec un spinner de chargement
+
+Tu veux que je te fasse ça ?
