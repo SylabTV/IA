@@ -202,15 +202,3 @@ Concept clé : L'encapsulation = protéger les données en les rendant privées 
 
 
 gemini
-
-
-C'est un excellent résumé ! Tu as parfaitement structuré les concepts clés. En tant que ton "professeur de programmation", je valide totalement cette fiche de révision. Elle est claire, visuelle et aborde le point le plus important : l'encapsulation.Pour compléter ta compréhension, voici une petite analyse supplémentaire sur le concept de visibilité (Public vs Privé) que tu as soulevé.🛡️ Le concept d'EncapsulationImagine que la classe User est un Smartphone.Public : Ce sont les boutons extérieurs (Volume, Allumage). N'importe qui peut appuyer dessus.Private : Ce sont les composants électroniques à l'intérieur. Tu ne peux pas les toucher directement sans ouvrir (et casser) le téléphone. Tu passes par les boutons (méthodes publiques) pour interagir avec l'électronique (propriétés privées).💡 Un petit défi pour toiDans ta "Version corrigée", tu as ajouté une méthode setUsername. C'est une excellente pratique !Pourquoi est-ce mieux d'utiliser un setUsername plutôt que de mettre la variable en public ?Cela permet d'ajouter des règles de validation. Par exemple :PHPpublic function setUsername(string $username): void
-{
-    // On vérifie que le nom n'est pas vide avant de changer
-    if (strlen($username) > 2) {
-        $this->username = $username;
-    } else {
-        echo "Erreur : Le nom est trop court !";
-    }
-}
-Si la variable était en public, n'importe qui pourrait mettre un nom vide ou n'importe quoi d'autre, ce qui pourrait faire planter ton application plus tard.📋 Complément de TerminologiePour ton tableau Syntaxe & Concepts, voici deux termes souvent utilisés par les développeurs :Terme TechniqueTraduction simpleInstanceUn objet réel créé à partir du moule (ex: $user).GetterUne méthode qui "récupère" une valeur (ex: getUsername).SetterUne méthode qui "définit" ou modifie une valeur (ex: setUsername).C'est ainsi que l'on construit des programmes solides et sécurisés !Souhaites-tu que nous examinions ensemble un autre exemple, comme la gestion d'un compte bancaire avec ces mêmes principes ?

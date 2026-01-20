@@ -1,0 +1,123 @@
+Parfait, je vais suivre exactement ton format et t’expliquer ce code comme un professeur pour débutant. 😊
+
+✅ 1) Explication globale (en une phrase)
+
+Ce code récupère tous les utilisateurs depuis une base de données et stocke le résultat dans une variable.
+
+✅ 2) Explication étape par étape
+🔹 1. Définition de la classe Controller
+class Controller extends AbstractController
+{
+
+
+👉 Ici tu crées une classe Controller qui hérite d’une autre classe AbstractController.
+
+📌 Ça veut dire que Controller peut utiliser des méthodes et propriétés définies dans AbstractController.
+
+🔹 2. La méthode home()
+public function home() : void
+{
+
+
+👉 home() est une méthode (fonction à l’intérieur d’une classe).
+
+public = accessible depuis l’extérieur
+
+: void = cette méthode ne retourne rien (elle ne renvoie pas de valeur)
+
+🔹 3. Préparer la requête SQL
+$query = $this->db->prepare('SELECT * FROM users');
+
+
+👉 Cette ligne prépare une requête SQL qui va récupérer tous les utilisateurs.
+
+$this->db : c’est l’objet de connexion à la base de données
+
+prepare() : prépare la requête SQL
+
+📌 Préparer une requête est plus sûr (contre les injections SQL).
+
+🔹 4. Définir les paramètres (vide ici)
+$parameters = [
+
+];
+
+
+👉 Ici, on crée un tableau $parameters vide.
+
+📌 Ce tableau sert à envoyer des valeurs dans la requête SQL si nécessaire.
+
+Exemple :
+
+$parameters = ['id' => 5];
+
+
+Mais ici, la requête n’a pas de paramètres.
+
+🔹 5. Exécuter la requête
+$query->execute($parameters);
+
+
+👉 Cette ligne exécute la requête SQL préparée.
+
+⚠️ Même si $parameters est vide, on peut quand même appeler execute().
+
+🔹 6. Récupérer le résultat
+$result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+👉 fetchAll() récupère toutes les lignes retournées par la requête.
+
+PDO::FETCH_ASSOC = on récupère les données sous forme de tableau associatif (clé = nom de la colonne)
+
+Exemple de résultat :
+
+[
+  ["id" => 1, "username" => "Gaston"],
+  ["id" => 2, "username" => "Marie"]
+]
+
+⚠️ Erreurs à éviter
+
+Oublier de préparer la requête
+
+$query = $this->db->prepare('SELECT * FROM users');
+
+
+❌ Si $this->db n’existe pas, ça plante.
+
+Ne pas exécuter la requête
+
+$query->execute($parameters);
+
+
+❌ Sans execute(), il n’y a pas de résultat.
+
+Oublier PDO::FETCH_ASSOC
+Sans ça, tu peux obtenir un résultat moins lisible (tableau indexé + associatif).
+
+Ne pas gérer les erreurs
+Si la requête échoue, le code ne le signale pas.
+
+📌 Bonnes pratiques
+
+✅ Ajouter une gestion d’erreur :
+
+if (!$query->execute($parameters)) {
+    throw new Exception("Erreur SQL");
+}
+
+
+✅ Vérifier que la base de données est connectée :
+
+if (!$this->db) {
+    throw new Exception("Pas de connexion à la DB");
+}
+
+📋 Tableau récapitulatif “Syntaxe & Concepts”
+Syntaxe	Signification	Exemple simple	Version débutant
+class Controller extends AbstractController	Héritage	class A extends B	Controller hérite de fonctionnalités d’AbstractController
+public function home() : void	Méthode publique sans retour	function test(): void {}	Fonction accessible partout et ne renvoie rien
+$this->db->prepare()	Prépare une requête SQL	$db->prepare("SELECT *")	On prépare la commande SQL avant de l’exécuter
+$query->execute($params)	Exécute la requête	$query->execute([])	On lance la commande SQL
+fetchAll(PDO::FETCH_ASSOC)	Récupère toutes les lignes en tableau associatif	fetchAll(PDO::FETCH_ASSOC)	On obtient les résultats sous forme de tableau clé/valeur
