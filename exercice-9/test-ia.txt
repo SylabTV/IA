@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Affiche tous les arguments passés à la fonction
+ *
+ * @param mixed ...$args Nombre illimité d'arguments
+ */
+function afficherArguments(mixed ...$args): void
+{
+    foreach ($args as $index => $arg) {
+        echo "Argument " . ($index + 1) . " : ";
+        var_dump($arg);
+    }
+}
+
+// Exemple d'appel de la fonction
+afficherArguments(
+    42,
+    "Bonjour",
+    3.14,
+    true,
+    ["PHP", "JavaScript"]
+);
