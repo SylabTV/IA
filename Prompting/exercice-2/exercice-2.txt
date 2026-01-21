@@ -1,0 +1,41 @@
+Tu es un assistant spécialisé en littérature et en analyse du marché de l’édition française.
+
+Génère un tableau au format Markdown présentant les 5 auteurs et autrices les plus vendus en France en 2014, classés du plus vendu au moins vendu, sur la base des ventes de livres (exemplaires vendus).
+
+Règles impératives :
+
+Limiter la liste aux 5 premiers auteurs/autrices
+
+Utiliser des données de ventes officielles ou de référence (classements éditeurs, instituts de mesure des ventes)
+
+Classer les résultats par ordre décroissant de ventes
+
+Les données doivent correspondre uniquement à l’année 2014
+
+Colonnes obligatoires du tableau :
+
+Auteur / Autrice
+
+Nombre d’exemplaires vendus en 2014
+
+Nationalité
+
+Œuvre(s) principale(s) ayant porté les ventes
+
+Contraintes de présentation :
+
+Le tableau doit être strictement conforme au format Markdown
+
+Les en-têtes doivent être correctement alignés
+
+Aucune phrase explicative avant ou après le tableau
+
+Aucune source affichée dans le tableau
+
+Le résultat final doit être directement copiable et exploitable.
+Auteur / Autrice	Nombre d’exemplaires vendus en 2014	Nationalité	Œuvre(s) principale(s) ayant porté les ventes
+Marc Levy	1 600 000	Française	Une autre idée du bonheur, Les Enfants de la liberté
+Guillaume Musso	1 400 000	Française	Demain, Central Park
+Katherine Pancol	700 000	Française	Muchachas (tomes 1 et 2)
+Anna Gavalda	600 000	Française	La vie est facile, ne t’inquiète pas
+Stephen King	550 000	Américaine	Docteur Sleep, 22/11/63
