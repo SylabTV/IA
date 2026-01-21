@@ -12,6 +12,10 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
-    "@google/genai": "^1.38.0"
+    "@google/genai": "^1.38.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2"
   }
 }

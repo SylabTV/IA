@@ -1,13 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>gemini-seo-helper</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Gemini SEO Helper</title>
+        <link rel="stylesheet" href="src/assets/css/style.css"/>
+    </head>
+    <body class="container-fluid p-0" data-bs-theme="dark">
+        <header>
+            <h1>Gemini SEO Helper</h1>
+        </header>
+        <main>
+            <section>
+                <h2>Votre contenu</h2>
+                <form id="content-form">
+                    <div>
+                        <label for="seo-search">
+                            Les termes de recherche
+                        </label>
+                        <input id="seo-search" name="seo-search" type="text" />
+                    </div>
+                    <div>
+                        <label for="content">
+                            Votre texte
+                        </label>
+                        <textarea id="content">
+
+                                </textarea>
+                    </div>
+                    <div>
+                        <button type="submit">Envoyer</button>
+                    </div>
+                </form>
+            </section>
+            <section id="gemini-answer">
+                <h2>L'analyse de Gemini</h2>
+            </section>
+            <div class="modal">
+                <div class="loader"></div>
+            </div>
+        </main>
+    <script type="module" src="src/assets/javascript/app.js"></script>
+    </body>
 </html>
