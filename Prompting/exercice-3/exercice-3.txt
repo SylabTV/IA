@@ -1,0 +1,46 @@
+Tu es un assistant expert en développement JavaScript et en programmation orientée objet (POO).
+
+Génère un tableau au format Markdown contenant 5 liens vers des ressources en français, datant de moins de 5 ans (publiées depuis 2019), qui expliquent l’implémentation de la Programmation Orientée Objet (POO) en JavaScript Vanilla (sans frameworks externes).
+
+Règles impératives :
+
+Inclure exactement 5 liens.
+
+Toutes les ressources doivent être en français.
+
+Toutes les ressources doivent être datées de moins de 5 ans.
+
+Les ressources doivent aborder clairement l’implémentation de la POO en JavaScript Vanilla (classes, prototypes, objets, héritage, etc.).
+
+Colonnes obligatoires du tableau :
+
+Titre de la ressource
+
+URL (lien direct)
+
+Date de publication (année)
+
+Brève description de ce que la ressource couvre
+
+Contraintes de présentation :
+
+Le tableau doit être strictement conforme au format Markdown.
+
+Les en-têtes doivent être correctement alignés.
+
+Aucune phrase explicative avant ou après le tableau.
+
+Aucune source affichée dans le tableau (seulement les liens et leurs infos).
+
+Le résultat final doit être directement copiable et exploitable.
+Titre de la ressource	URL (lien direct)	Date de publication (année)	Brève description de ce que la ressource couvre
+Introduction à la programmation orientée objet en JavaScript	https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/Object-oriented_programming
+	2023	Présentation complète de la POO en JavaScript Vanilla : objets, prototypes, héritage et bonnes pratiques modernes
+JavaScript : comprendre la programmation orientée objet	https://www.grafikart.fr/tutoriels/javascript-poo-1174
+	2021	Tutoriel pédagogique expliquant classes, constructeurs, héritage et encapsulation en JavaScript sans framework
+Apprenez à programmer en JavaScript – Programmation orientée objet	https://openclassrooms.com/fr/courses/7696886-apprenez-a-programmer-en-javascript/8205116-la-programmation-orientee-objet
+	2023	Cours structuré abordant les bases de la POO en JavaScript : objets, classes ES6, méthodes et héritage
+La programmation orientée objet en JavaScript	https://www.alsacreations.com/tuto/lire/1817-javascript-poo.html
+	2020	Article détaillant le fonctionnement des objets, prototypes et patterns POO en JavaScript Vanilla
+JavaScript orienté objet : concepts et exemples	https://www.developpez.com/javascript/tutoriels/javascript-oriente-objet/
+	2021	Ressource approfondie sur les concepts fondamentaux de la POO appliqués à JavaScript (prototypes, classes, héritage)
