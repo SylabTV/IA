@@ -1,0 +1,48 @@
+Tu es un assistant spécialisé en histoire politique française.
+
+Génère un tableau au format Markdown classant tous les présidents de la Ve République française élus au suffrage universel direct selon leur score obtenu au second tour de l’élection présidentielle, exprimé en pourcentage des suffrages exprimés, du plus élevé au plus faible.
+
+Règles impératives :
+
+Inclure toutes les élections présidentielles à deux tours depuis 1965
+
+Exclure les présidents non élus au suffrage universel direct
+
+Utiliser uniquement les résultats officiels du second tour
+
+Trier les lignes par ordre décroissant de pourcentage
+
+Ne pas arrondir les pourcentages (conserver les valeurs officielles)
+
+Colonnes obligatoires du tableau :
+
+Président
+
+Année de l’élection
+
+Pourcentage obtenu au second tour (%)
+
+Adversaire au second tour
+
+Contraintes de présentation :
+
+Le tableau doit être strictement conforme au format Markdown
+
+Les en-têtes doivent être correctement alignés
+
+Aucune phrase explicative avant ou après le tableau
+
+Aucune source affichée dans le tableau
+
+Le résultat final doit être directement copiable et exploitable.
+Président	Année de l’élection	Pourcentage obtenu au second tour (%)	Adversaire au second tour
+Jacques Chirac	2002	**82,21 **	Jean-Marie Le Pen
+Emmanuel Macron	2017	**66,10 **	Marine Le Pen
+Emmanuel Macron	2022	**58,55 **	Marine Le Pen
+Georges Pompidou	1969	**58,21 **	Alain Poher
+François Mitterrand	1988	**54,02 **	Jacques Chirac
+Charles de Gaulle	1965	**55,20 **	François Mitterrand
+Jacques Chirac	1995	**52,64 **	Lionel Jospin
+François Hollande	2012	**51,62 **	Nicolas Sarkozy
+François Mitterrand	1981	**51,76 **	Valéry Giscard d’Estaing
+Valéry Giscard d’Estaing	1974	**50,81 **	François Mitterrand
