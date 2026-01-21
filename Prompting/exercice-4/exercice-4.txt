@@ -1,0 +1,54 @@
+Tu es un assistant expert en HTML5 et en accessibilité web (WCAG).
+
+À partir du code HTML ci-dessous, génère une version corrigée et améliorée en mettant l’accent sur l’accessibilité.
+
+Objectifs :
+
+Respecter les bonnes pratiques d’accessibilité (WCAG 2.x)
+
+Améliorer la sémantique HTML
+
+Rendre le formulaire utilisable avec un lecteur d’écran et au clavier
+
+Associer correctement les labels aux champs de formulaire
+
+Éviter l’usage d’attributs non accessibles (ex. onclick inline)
+
+Contraintes :
+
+Conserver la fonctionnalité initiale du formulaire
+
+Utiliser uniquement du HTML valide (pas de framework)
+
+Ajouter des attributs ARIA uniquement si nécessaire
+
+Code à corriger :
+
+<div>
+    <h2>Formulaire d'inscription</h2>
+    <input type="text" id="nom" placeholder="Votre nom">
+    <input type="email" id="email" placeholder="Votre email">
+    <button onclick="submitForm()">Envoyer</button>
+</div>
+
+
+Retour attendu :
+
+Fournir uniquement le code HTML corrigé, sans texte explicatif
+
+Le code final doit être directement copiable et exploitable
+<form aria-labelledby="form-title">
+  <h2 id="form-title">Formulaire d'inscription</h2>
+
+  <div>
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Votre email" required>
+  </div>
+
+  <button type="submit">Envoyer</button>
+</form>
