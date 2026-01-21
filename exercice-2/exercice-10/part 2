@@ -1,0 +1,9 @@
+<?php
+
+$generator = new UserGenerator();
+
+// Générer 5 utilisateurs
+$users = $generator->generate(5);
+
+// Affichage
+print_r($users);

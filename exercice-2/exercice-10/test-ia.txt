@@ -1,0 +1,94 @@
+<?php
+
+/**
+ * Classe UserGenerator
+ * Permet de générer des utilisateurs aléatoires
+ */
+class UserGenerator
+{
+    /**
+     * Liste de prénoms possibles
+     */
+    private array $firstNames = [
+        'Alice', 'Bob', 'Charlie', 'Diane', 'Emma', 'Lucas', 'Nina', 'Paul'
+    ];
+
+    /**
+     * Liste de noms possibles
+     */
+    private array $lastNames = [
+        'Dupont', 'Martin', 'Durand', 'Lefevre', 'Moreau', 'Petit'
+    ];
+
+    /**
+     * Génère un ou plusieurs utilisateurs
+     *
+     * @param int $count Nombre d'utilisateurs à générer
+     * @return array Liste des utilisateurs
+     */
+    public function generate(int $count = 1): array
+    {
+        $users = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $firstName = $this->randomValue($this->firstNames);
+            $lastName  = $this->randomValue($this->lastNames);
+
+            $users[] = [
+                'id'         => $this->generateUuid(),
+                'first_name' => $firstName,
+                'last_name'  => $lastName,
+                'email'      => $this->generateEmail($firstName, $lastName),
+                'password'   => password_hash($this->generatePassword(), PASSWORD_DEFAULT),
+                'created_at' => (new DateTimeImmutable())->format('Y-m-d H:i:s'),
+            ];
+        }
+
+        return $users;
+    }
+
+    /**
+     * Retourne une valeur aléatoire depuis un tableau
+     */
+    private function randomValue(array $values): string
+    {
+        return $values[array_rand($values)];
+    }
+
+    /**
+     * Génère un email valide
+     */
+    private function generateEmail(string $firstName, string $lastName): string
+    {
+        $domains = ['example.com', 'mail.com', 'test.fr'];
+        $domain  = $this->randomValue($domains);
+
+        return strtolower($firstName . '.' . $lastName . '@' . $domain);
+    }
+
+    /**
+     * Génère un mot de passe aléatoire
+     */
+    private function generatePassword(int $length = 12): string
+    {
+        return bin2hex(random_bytes($length / 2));
+    }
+
+    /**
+     * Génère un identifiant unique (UUID v4)
+     */
+    private function generateUuid(): string
+    {
+        return sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            random_int(0, 0xffff),
+            random_int(0, 0xffff),
+            random_int(0, 0xffff),
+            random_int(0, 0x0fff) | 0x4000,
+            random_int(0, 0x3fff) | 0x8000,
+            random_int(0, 0xffff),
+            random_int(0, 0xffff),
+            random_int(0, 0xffff)
+        );
+    }
+}
